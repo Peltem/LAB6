@@ -36,6 +36,7 @@ public class StudyListFragments extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         studyListInit();
         addStudyBtnInit();
+        taskBtn();
     }
     private void studyListInit(){
         if (studyAdapter == null) {
@@ -57,10 +58,22 @@ public class StudyListFragments extends Fragment {
         });}
     private void addStudyBtnInit(){
         binding.addStudyBtn.setOnClickListener((view)->{
+
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.main_fragment, new AddStudyFragments(),"add_study")
                     .addToBackStack(null)
                     .commit();
         });
+
     }
+    private void taskBtn(){
+        binding.taskBtn.setOnClickListener((view)->{
+
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_fragment, TaskFragment.getInstance(studyList),"task")
+                    .addToBackStack("task")
+                    .commit();
+        });
 }
+    }
